@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Melissa Gonzalez, Biology and Physics student at Queens College, CUNY. Research portfolio.">
+<title>Melissa Gonzalez Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Public+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: single reading column; featured project as one framed field-report block; air-quality index scale as the signature band */
+:root {
+  --paper: #F4F6F8;
+  --surface: #FFFFFF;
+  --ink: #14202B;
+  --muted: #56636F;
+  --line: #D5DCE2;
+  --accent: #1E4CC8;
+  --accent-soft: #E3EAFB;
+  --ok: #2E7D4F;
+  --ok-soft: #E2F2E8;
+  --aqi-1: #3DA35D; --aqi-2: #E3BE3B; --aqi-3: #E5823A; --aqi-4: #D34545; --aqi-5: #8A4CB0; --aqi-6: #7A2E3A;
+  --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --body: "Public Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0D1319; --surface: #141C24; --ink: #E5EBF0; --muted: #98A4AF; --line: #26313B;
+    --accent: #86A6FF; --accent-soft: #1A2546; --ok: #7CCB9A; --ok-soft: #15291E; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0D1319; --surface: #141C24; --ink: #E5EBF0; --muted: #98A4AF; --line: #26313B;
+  --accent: #86A6FF; --accent-soft: #1A2546; --ok: #7CCB9A; --ok-soft: #15291E; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 40px 64px;
+}
+.wrap { max-width: 860px; margin: 0 auto; display: flex; flex-direction: column; gap: 64px; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: clamp(2.4rem, 7vw, 3.6rem); font-weight: 700; letter-spacing: -0.02em; }
+h2 { font-size: 1.6rem; font-weight: 700; }
+h3 { font-size: 1.15rem; font-weight: 500; }
+p { margin: 0; max-width: 65ch; }
+a { color: var(--accent); }
+.label { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.mono { font-family: var(--mono); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+/* Hero */
+.hero { display: flex; flex-direction: column; gap: 20px; }
+.hero .degree { font-size: 1.1rem; color: var(--muted); }
+.hero .degree strong { color: var(--ink); font-weight: 600; }
+.lede { font-size: 1.12rem; }
+.contact { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; font-size: 0.95rem; }
+.email { font-family: var(--mono); font-size: 0.9rem; user-select: all; }
+.copy { font: 500 0.8rem var(--mono); color: var(--accent); background: var(--accent-soft); border: 0; padding: 6px 12px; border-radius: 999px; cursor: pointer; }
+.copy:hover { filter: brightness(0.97); }
+.meta { color: var(--muted); }
+
+/* AQI band */
+.aqi { display: flex; flex-direction: column; gap: 8px; }
+.aqi-bar { display: grid; grid-template-columns: repeat(6, 1fr); height: 10px; border-radius: 2px; overflow: hidden; }
+.aqi-bar span:nth-child(1){background:var(--aqi-1)} .aqi-bar span:nth-child(2){background:var(--aqi-2)}
+.aqi-bar span:nth-child(3){background:var(--aqi-3)} .aqi-bar span:nth-child(4){background:var(--aqi-4)}
+.aqi-bar span:nth-child(5){background:var(--aqi-5)} .aqi-bar span:nth-child(6){background:var(--aqi-6)}
+.aqi-scale { display: grid; grid-template-columns: repeat(6, 1fr); font-family: var(--mono); font-size: 0.7rem; color: var(--muted); }
+.aqi-scale span { min-width: 0; }
+@media (max-width: 560px) { .aqi-scale .hide-sm { visibility: hidden; } }
+
+/* Featured project */
+.feature { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: clamp(20px, 4vw, 36px); display: flex; flex-direction: column; gap: 28px; }
+.feature-head { display: flex; flex-direction: column; gap: 12px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font: 500 0.75rem var(--mono); padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+.chip.live { color: var(--accent); background: var(--accent-soft); border-color: transparent; }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px 32px; }
+.fact { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.fact p { font-size: 0.95rem; }
+.fact ul { margin: 0; padding-left: 18px; font-size: 0.95rem; }
+
+.timeline { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; border-top: 1px solid var(--line); }
+.timeline li { display: grid; grid-template-columns: 2.2rem minmax(0, 1fr) auto; gap: 12px; align-items: baseline; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.timeline .n { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.timeline .what strong { font-weight: 600; }
+.timeline .what span { display: block; color: var(--muted); font-size: 0.9rem; }
+.timeline .when { font-family: var(--mono); font-size: 0.78rem; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.timeline li.now .n, .timeline li.now .when { color: var(--accent); }
+@media (max-width: 520px) { .timeline li { grid-template-columns: 2rem minmax(0, 1fr); } .timeline .when { grid-column: 2; } }
+
+.results { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 24px; align-items: center; }
+@media (max-width: 640px) { .results { grid-template-columns: 1fr; } }
+.plot { border: 1px dashed var(--line); border-radius: 8px; padding: 12px; }
+.plot svg { display: block; width: 100%; height: auto; }
+.results p { font-size: 0.95rem; color: var(--muted); }
+
+/* Other work */
+.section { display: flex; flex-direction: column; gap: 24px; }
+.section-head { display: flex; flex-direction: column; gap: 6px; }
+.projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 32px; }
+.project { display: flex; flex-direction: column; gap: 8px; min-width: 0; padding-top: 16px; border-top: 2px solid var(--ink); }
+.project p { font-size: 0.95rem; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+
+.labs { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0 32px; }
+.lab { display: flex; flex-direction: column; gap: 4px; padding: 14px 0; border-bottom: 1px solid var(--line); min-width: 0; }
+.lab .code { font-family: var(--mono); font-size: 0.75rem; color: var(--accent); letter-spacing: 0.04em; }
+.lab strong { font-weight: 600; }
+.lab span { font-size: 0.9rem; color: var(--muted); }
+
+.skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px 32px; }
+.skills div { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.skills p { font-size: 0.95rem; }
+
+footer { color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--line); padding-top: 20px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <span class="label">Undergraduate researcher · Bronx, NY</span>
+    <h1>Melissa Gonzalez</h1>
+    <p class="degree"><strong>B.A. Biology and B.A. Physics</strong>, Queens College, CUNY · Pre-Med and Pre-Engineering · Expected June 2029</p>
+    <p class="lede">I study how the body works and how the physical world around it affects health. My current project uses New York City public health data to look at air pollution and asthma in the borough where I live.</p>
+    <div class="contact">
+      <span class="email" id="email">elisagonzalez2726@gmail.com</span>
+      <button class="copy" id="copy-email" type="button">Copy email</button>
+      <span class="meta">English · Spanish (bilingual)</span>
+    </div>
+  </header>
+
+  <div class="aqi" aria-label="U.S. Air Quality Index categories">
+    <div class="aqi-bar" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="aqi-scale"><span>Good</span><span>Moderate</span><span class="hide-sm">Sensitive</span><span>Unhealthy</span><span class="hide-sm">Very</span><span>Hazardous</span></div>
+  </div>
+
+  <article class="feature" aria-labelledby="feature-title">
+    <div class="feature-head">
+      <div class="chips"><span class="chip live">In progress</span><span class="chip">Independent research</span><span class="chip">Nov 2026 – Jan 2027</span></div>
+      <h2 id="feature-title">Asthma and Air Quality in the Bronx</h2>
+      <p>Do New York City neighborhoods with more fine-particle air pollution (PM<sub>2.5</sub>) have higher rates of asthma emergency department visits, and does that link hold after accounting for neighborhood poverty? The Bronx has the city's highest child asthma hospitalization rate, so I highlight its neighborhoods within a citywide comparison.</p>
+    </div>
+
+    <div class="facts">
+      <div class="fact">
+        <span class="label">Data</span>
+        <ul>
+          <li>Asthma ED visits per 10,000 residents, by community district</li>
+          <li>Annual PM<sub>2.5</sub> (µg/m³) and NO<sub>2</sub> (ppb) from the NYC Community Air Survey</li>
+          <li>Neighborhood poverty rate</li>
+        </ul>
+        <p class="meta">Source: NYC Environment &amp; Health Data Portal</p>
+      </div>
+      <div class="fact">
+        <span class="label">Methods</span>
+        <ul>
+          <li>Merge ~59 community districts into one dataset</li>
+          <li>Scatter plots and a neighborhood map</li>
+          <li>Correlation and multiple regression (PM<sub>2.5</sub> + poverty)</li>
+          <li>Residual analysis for Bronx districts</li>
+        </ul>
+        <p class="meta">Tools: Python (pandas, matplotlib), Excel</p>
+      </div>
+    </div>
+
+    <div class="fact">
+      <span class="label">Plan</span>
+      <ol class="timeline">
+        <li class="now"><span class="n">1</span><span class="what"><strong>Read and plan</strong><span>Literature review, faculty mentor outreach</span></span><span class="when">Nov 2–15</span></li>
+        <li><span class="n">2</span><span class="what"><strong>Get the data</strong><span>Download, clean and merge by district</span></span><span class="when">Nov 16–29</span></li>
+        <li><span class="n">3</span><span class="what"><strong>Describe and chart</strong><span>Summary tables, rankings, scatter plot, map</span></span><span class="when">Nov 30–Dec 13</span></li>
+        <li><span class="n">4</span><span class="what"><strong>Run the statistics</strong><span>Correlation and regression with poverty</span></span><span class="when">Dec 14–27</span></li>
+        <li><span class="n">5</span><span class="what"><strong>Bronx deep dive</strong><span>Residuals by district, draft report</span></span><span class="when">Dec 28–Jan 10</span></li>
+        <li><span class="n">6</span><span class="what"><strong>Poster and feedback</strong><span>Final report and research poster</span></span><span class="when">Jan 11–24</span></li>
+      </ol>
+    </div>
+
+    <div class="results">
+      <div class="plot" aria-label="Empty chart frame for the planned PM2.5 versus asthma ED visits scatter plot">
+        <svg viewBox="0 0 320 200" role="img" aria-label="Planned scatter plot axes, no data yet">
+          <line x1="48" y1="20" x2="48" y2="160" stroke="var(--muted)" stroke-width="1"/>
+          <line x1="48" y1="160" x2="300" y2="160" stroke="var(--muted)" stroke-width="1"/>
+          <line x1="48" y1="90" x2="300" y2="90" stroke="var(--line)" stroke-width="1" stroke-dasharray="3 4"/>
+          <line x1="174" y1="20" x2="174" y2="160" stroke="var(--line)" stroke-width="1" stroke-dasharray="3 4"/>
+          <text x="174" y="188" text-anchor="middle" fill="var(--muted)" font-family="IBM Plex Mono, monospace" font-size="11">PM2.5 (µg/m³)</text>
+          <text x="16" y="90" text-anchor="middle" fill="var(--muted)" font-family="IBM Plex Mono, monospace" font-size="11" transform="rotate(-90 16 90)">ED visits / 10,000</text>
+          <text x="174" y="94" text-anchor="middle" fill="var(--muted)" font-family="Public Sans, sans-serif" font-size="12">Data added in December</text>
+        </svg>
+      </div>
+      <div class="fact">
+        <span class="label">Results</span>
+        <p>Findings, charts and the regression table will be posted here when the analysis is complete in January 2027. The project will also be presented as a research poster.</p>
+      </div>
+    </div>
+  </article>
+
+  <section class="section" aria-labelledby="work-title">
+    <div class="section-head">
+      <span class="label">Other work</span>
+      <h2 id="work-title">Projects</h2>
+    </div>
+    <div class="projects">
+      <div class="project">
+        <span class="label">Research paper</span>
+        <h3>CRISPR-Cas9 and Inherited Blood Disorders</h3>
+        <p>Independently reviewed the scientific literature on CRISPR-Cas9 gene editing and its use in treating sickle cell disease and beta-thalassemia, and wrote it up as a research paper for a general science audience.</p>
+        <div class="tags"><span class="chip">Literature review</span><span class="chip">Genetics</span><span class="chip">Science writing</span></div>
+      </div>
+      <div class="project">
+        <span class="label">Software · 2026</span>
+        <h3>Simple Health Tracker</h3>
+        <p>A Python program that tracks daily habits such as water intake and sleep. It takes user input, checks it with conditionals, and stores and displays the data with loops.</p>
+        <div class="tags"><span class="chip">Python</span><span class="chip">Health data</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="lab-title">
+    <div class="section-head">
+      <span class="label">Queens College, CUNY</span>
+      <h2 id="lab-title">Laboratory experience</h2>
+    </div>
+    <div class="labs">
+      <div class="lab"><span class="code">BIOL 105</span><strong>Physiology &amp; Cell Biology</strong><span>Animal dissection, blood and histology slides under compound microscopes, plant structure</span></div>
+      <div class="lab"><span class="code">BIOL 106</span><strong>Life-Forms &amp; Ecosystems</strong><span>Animal and plant diversity, evolution, ecology, dissection, lab reports</span></div>
+      <div class="lab"><span class="code">General Chem I</span><strong>Quantitative techniques</strong><span>Titrations (KHP, FAS), calorimetry, redox, molar mass, percent-error analysis</span></div>
+      <div class="lab"><span class="code">General Chem II</span><strong>Analysis and equilibrium</strong><span>Beer's Law spectroscopy, chromatography, kinetics, buffers, electrochemistry</span></div>
+      <div class="lab"><span class="code">Organic Chem I</span><strong>Separation and synthesis</strong><span>Distillation, extraction, TLC, recrystallization, Grignard synthesis</span></div>
+      <div class="lab"><span class="code">CSCI 111</span><strong>Algorithmic Problem Solving</strong><span>Designed, wrote and debugged programs; documented each algorithm</span></div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="skills-title">
+    <div class="section-head">
+      <span class="label">Toolkit</span>
+      <h2 id="skills-title">Skills</h2>
+    </div>
+    <div class="skills">
+      <div><span class="label">Technical</span><p>Python (basic), Microsoft Excel, Word and PowerPoint, biology and chemistry lab techniques, literature review</p></div>
+      <div><span class="label">Communication</span><p>Bilingual English and Spanish, patient-style communication from front-desk and customer service roles, conflict resolution</p></div>
+      <div><span class="label">Work</span><p>Federal Work-Study, Queens College Office of the Registrar, handling confidential records under FERPA</p></div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Melissa Gonzalez · Queens College, CUNY</span>
+    <span class="mono">Updated Oct 2026</span>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var btn = document.getElementById('copy-email');
+  var email = document.getElementById('email');
+  btn.addEventListener('click', function () {
+    var text = email.textContent.trim();
+    function selectIt() {
+      try { var r = document.createRange(); r.selectNodeContents(email); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); } catch (e) {}
+      btn.textContent = 'Selected, press Ctrl+C';
+    }
+    try {
+      navigator.clipboard.writeText(text).then(function () { btn.textContent = 'Copied'; }, selectIt);
+    } catch (e) { selectIt(); }
+    setTimeout(function () { btn.textContent = 'Copy email'; }, 2400);
+  });
+})();
+</script>
+
+</body>
+</html>
